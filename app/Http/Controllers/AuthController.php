@@ -50,13 +50,30 @@ class AuthController extends Controller
         ]);
 
         $user = DB::table('users')->where('email', $request->email)->first();
-
+        $doctor = DB::table('doctors')->where('email', $request->email)->first();
+        
         if ($user && Hash::check($request->password, $user->password)) {
+            // If credentials are in the 'users' table and user is found
             Session::put('user', $user);
-            return redirect()->route('dashboard');
+        
+            // Check role and redirect accordingly
+            if ($user->role == 'Admin') {
+                return redirect()->route('dashboard'); // Redirect to admin dashboard
+            } elseif ($user->role == 'Patient') {
+                return redirect()->route('patient.index'); // Redirect to patient index
+            }
+        } elseif ($doctor && Hash::check($request->password, $doctor->password)) {
+            // If credentials are in the 'doctors' table and doctor is found
+            Session::put('user', $doctor);
+        
+            // Check if the doctor has any role you want to route to
+            // You can also define logic for doctor role, if required.
+            return redirect()->route('doctor.index'); // Redirect to doctor's dashboard or appropriate page
+        } else {
+            // If no matching credentials found in either table
+            return back()->withErrors(['email' => 'Invalid credentials.']);
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        
     }
 
     public function logout()

@@ -153,6 +153,10 @@
                                     <input type="email" name="email" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <input type="text" name="role" class="form-control" value="Patient" readonly required>
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label">Password</label>
                                     <input type="password" name="password" class="form-control" required>
                                 </div>

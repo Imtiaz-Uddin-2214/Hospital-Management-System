@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Premier Medical Center</a>
         <div class="d-flex">
-            <span class="navbar-text me-3 text-white">Ayon Barua</span>
+            <span class="navbar-text me-3 text-white">{{ Session::get('user')->name }}</span>
             <button class="btn btn-outline-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-three-dots-vertical"></i> <!-- Three dot icon -->
             </button>

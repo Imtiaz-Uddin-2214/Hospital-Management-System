@@ -21,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 //AuthController
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -31,6 +28,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->name('dashboard');
+
+Route::get('/doctor/dashboard', function () {
+    return view('doctor.index');
+})->name('doctor.index');
+
+Route::get('/patient/dashboard', function () {
+    return view('patient.index');
+})->name('patient.index');
 
 //UserController
 Route::get('/users', [UserController::class, 'index'])->name('admin.index');

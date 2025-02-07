@@ -19,13 +19,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'role' => 'required',
             'password' => 'required|min:6',
         ]);
 
         DB::table('users')->insert([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
+            'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
